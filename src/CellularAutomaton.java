@@ -17,6 +17,7 @@ public class CellularAutomaton extends Canvas implements Runnable {
         cellsWidth = width / scale;
         cellsHeight = height / scale;
         cells = new int[cellsWidth][cellsHeight];
+        randomizeCells();
     }
 
     @Override
@@ -100,8 +101,16 @@ public class CellularAutomaton extends Canvas implements Runnable {
     // TODO: randomizeCell(double percentage) which allows for a percentage of alive cells to begin with
 
     private int getNeighbors(int x, int y) {
-        // TODO: Implement this
-        return 0;
+        int count = 0;
+        for(int i = -1; i <= 1; i++) {
+            for(int j = -1; j <= 1; j++) {
+                int adjustX = (x + i + cellsWidth) % (cellsWidth);
+                int adjustY = (y + j + cellsHeight) % (cellsHeight);
+                count += cells[adjustX][adjustY];
+            }
+        }
+        count -= cells[x][y];
+        return count;
     }
 
     // TODO: survivalSet

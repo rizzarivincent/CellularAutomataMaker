@@ -19,7 +19,7 @@ public class App {
         // Constructing the cellular automaton
         CellularAutomaton cellularAutomaton = new CellularAutomaton(WIDTH, HEIGHT, SCALE);
         // Making the two JPanels
-        JPanel cellPanel = new JPanel();
+        CellPanel cellPanel = new CellPanel(cellularAutomaton);
         ButtonPanel buttonPanel = new ButtonPanel(cellularAutomaton);
         // Adding the JPanels
         frame.add(buttonPanel);
