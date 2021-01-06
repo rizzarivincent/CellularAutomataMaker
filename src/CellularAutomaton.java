@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Random;
 
 public class CellularAutomaton extends Canvas implements Runnable {
 
@@ -6,9 +7,16 @@ public class CellularAutomaton extends Canvas implements Runnable {
     private boolean running = false;
 
     private int[][] cells;
+    private final int cellsWidth;
+    private final int cellsHeight;
+
+    private boolean[] survival = new boolean[8];
+    private boolean[] birth = new boolean[8];
 
     public CellularAutomaton(int width, int height, int scale) {
-        cells = new int[width / scale][height / scale];
+        cellsWidth = width / scale;
+        cellsHeight = height / scale;
+        cells = new int[cellsWidth][cellsHeight];
     }
 
     @Override
@@ -60,7 +68,19 @@ public class CellularAutomaton extends Canvas implements Runnable {
     }
 
     private void tick() {
-
+        int[][] oldCells = clone2DArray(cells);
+        int neighbors;
+        for (int i = 0; i < cellsWidth; i++) {
+            for (int j = 0; j < cellsHeight; j++) {
+                neighbors = getNeighbors(i, j);
+                if (oldCells[i][j] == 0 && birth[neighbors - 1]) {
+                    cells[i][j] = 1;
+                }
+                if (oldCells[i][j] == 1 && !survival[neighbors - 1]) {
+                    cells[i][j] = 0;
+                }
+            }
+        }
     }
 
     private void render() {
@@ -68,6 +88,35 @@ public class CellularAutomaton extends Canvas implements Runnable {
     }
 
     public void randomizeCells() {
+        Random random = new Random();
 
+        for (int i = 0; i < cellsWidth; i++) {
+            for (int j = 0; j < cellsHeight; j++) {
+                cells[i][j] = random.nextInt(2);
+            }
+        }
+    }
+
+    // TODO: randomizeCell(double percentage) which allows for a percentage of alive cells to begin with
+
+    private int getNeighbors(int x, int y) {
+        // TODO: Implement this
+        return 0;
+    }
+
+    // TODO: survivalSet
+
+    // TODO: survivalGet
+
+    // TODO: birthSet
+
+    // TODO: birthGet
+
+    private int[][] clone2DArray(int[][] original) {
+        int[][] copy = new int[original.length][original[0].length];
+        for(int i = 0; i < original.length; i++) {
+            copy[i] = original[i].clone();
+        }
+        return copy;
     }
 }

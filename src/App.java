@@ -17,10 +17,13 @@ public class App {
         frame.setMaximumSize(windowDimension);
 
         // Constructing the cellular automaton
-    CellularAutomaton cellularAutomaton = new CellularAutomaton(WIDTH, HEIGHT, SCALE);
+        CellularAutomaton cellularAutomaton = new CellularAutomaton(WIDTH, HEIGHT, SCALE);
         // Making the two JPanels
         JPanel cellPanel = new JPanel();
         ButtonPanel buttonPanel = new ButtonPanel(cellularAutomaton);
+        // Adding the JPanels
+        frame.add(buttonPanel);
+        frame.add(cellPanel);
 
         frame.setVisible(true);
     }
