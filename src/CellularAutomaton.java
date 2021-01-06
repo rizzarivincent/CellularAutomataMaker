@@ -85,7 +85,7 @@ public class CellularAutomaton extends Canvas implements Runnable {
     }
 
     private void render() {
-
+        // TODO: Rip rendering code straight out the other project
     }
 
     public void randomizeCells() {
