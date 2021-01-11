@@ -15,16 +15,15 @@ public class App {
         frame.setPreferredSize(windowDimension);
         frame.setMinimumSize(windowDimension);
         frame.setMaximumSize(windowDimension);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        // Constructing the cellular automaton
+        // Constructing and adding the cellular automaton Canvas & JPanel
         CellularAutomaton cellularAutomaton = new CellularAutomaton(WIDTH, HEIGHT, SCALE);
-        // Making the two JPanels
-        CellPanel cellPanel = new CellPanel(cellularAutomaton);
         ButtonPanel buttonPanel = new ButtonPanel(cellularAutomaton);
-        // Adding the JPanels
         frame.add(buttonPanel);
-        frame.add(cellPanel);
+        frame.add(cellularAutomaton);
 
         frame.setVisible(true);
+        cellularAutomaton.start();
     }
 }
